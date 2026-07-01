@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hawaii 2026 Custom Travel Website</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --card: #ffffff;
+  --border: #e2e8f0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+header {
+  background: linear-gradient(135deg, #0f766e, #0284c7 55%, #7c3aed);
+  color: white;
+  padding: 42px 22px;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+h1 {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+}
+.subtitle {
+  font-size: 18px;
+  opacity: .95;
+  margin-top: 8px;
+}
+.quick-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.quick {
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 16px;
+  padding: 14px;
+  backdrop-filter: blur(6px);
+}
+.quick strong { display:block; font-size:15px; }
+.quick span { font-size:13px; opacity:.92; }
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  overflow-x: auto;
+}
+.nav-inner a, .filter-btn {
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 999px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+}
+.nav-inner a:hover, .filter-btn:hover { background:#f1f5f9; }
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 26px 16px 60px;
+}
+.section-title {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+.section-title h2 {
+  margin:0;
+  font-size: 28px;
+  letter-spacing:-.02em;
+}
+.section-title p { color: var(--muted); margin: 6px 0 0; }
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.day-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 7px solid var(--accent);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .06);
+}
+.day-top {
+  display:flex;
+  justify-content:space-between;
+  gap: 12px;
+}
+.date {
+  color: var(--accent);
+  font-weight: 800;
+}
+.date span {
+  color: var(--muted);
+  font-weight: 500;
+  margin-left: 4px;
+}
+.day-card h3 {
+  margin: 5px 0 0;
+  font-size: 20px;
+}
+.island {
+  color: var(--muted);
+  margin: 2px 0 0;
+  font-size: 14px;
+}
+.summary {
+  margin: 12px 0 0;
+}
+button {
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  border-radius: 999px;
+  padding: 7px 11px;
+  cursor: pointer;
+  height: 34px;
+}
+.details {
+  display: none;
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.details.open { display:block; }
+.details ul { margin: 0 0 12px 18px; padding: 0; }
+.note {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px 0;
+  color: #7c2d12;
+}
+.links {
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.links a, .booking-card a {
+  display:inline-block;
+  background: #e0f2fe;
+  color: #075985;
+  border-radius: 999px;
+  padding: 8px 11px;
+  text-decoration:none;
+  font-weight: 700;
+  font-size: 14px;
+}
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.booking-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .06);
+}
+.booking-card h3 { margin:0 0 6px; }
+.checklist {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  margin-top:18px;
+}
+.checklist label {
+  display:block;
+  padding: 9px 0;
+  border-bottom:1px solid #f1f5f9;
+}
+.checklist label:last-child { border-bottom:0; }
+footer {
+  color: var(--muted);
+  text-align:center;
+  padding: 30px;
+  font-size: 13px;
+}
+@media (max-width: 800px) {
+  h1 { font-size: 32px; }
+  .quick-grid, .day-grid, .booking-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  nav, button { display:none; }
+  body { background:white; }
+  .day-grid, .booking-grid { display:block; }
+  .day-card, .booking-card { break-inside: avoid; margin-bottom: 12px; box-shadow:none; }
+  .details { display:block; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <h1>Hawaii 2026 Custom Travel Website</h1>
+    <div class="subtitle">Los Angeles · Big Island · Kauai · Maui | Oct. 1-17, 2026</div>
+    <div class="quick-grid">
+      <div class="quick"><strong>Big Island</strong><span>Oct. 3-7 · Manta rays, Mauna Kea, Kona</span></div>
+      <div class="quick"><strong>Kauai</strong><span>Oct. 7-12 · Nā Pali, Waimea Canyon, Hanalei</span></div>
+      <div class="quick"><strong>Maui</strong><span>Oct. 12-17 · Turtles, Road to Hana, Haleakalā</span></div>
+      <div class="quick"><strong>Top Priority</strong><span>Book manta ray + helicopter first</span></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#itinerary">Daily Itinerary</a>
+    <a href="#bookings">Booking Links</a>
+    <a href="#checklist">Trip Checklist</a>
+    <button class="filter-btn" onclick="filterIsland('All')">All</button>
+    <button class="filter-btn" onclick="filterIsland('Big Island')">Big Island</button>
+    <button class="filter-btn" onclick="filterIsland('Kauai')">Kauai</button>
+    <button class="filter-btn" onclick="filterIsland('Maui')">Maui</button>
+  </div>
+</nav>
+
+<main>
+  <section id="itinerary">
+    <div class="section-title">
+      <div>
+        <h2>Daily Itinerary</h2>
+        <p>Click “Details” on any day to see stops, notes, and booking links.</p>
+      </div>
+    </div>
+    <div class="day-grid" id="dayGrid">
+      
+    <article class="day-card" data-island="Travel / Los Angeles" style="--accent:#0284c7">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 1 <span>Thursday</span></div>
+          <h3>Pittsburgh → Los Angeles</h3>
+          <p class="island">Travel / Los Angeles</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Fly PIT → LAX. Check in and relax.</p>
+      <div class="details">
+        <ul><li>Fly PIT → LAX</li><li>Check in</li><li>Casual dinner near hotel</li></ul>
+        
+        
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Los Angeles" style="--accent:#0284c7">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 2 <span>Friday</span></div>
+          <h3>Los Angeles Day</h3>
+          <p class="island">Los Angeles</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Optional Universal Studios day or easy travel-recovery day.</p>
+      <div class="details">
+        <ul><li>Universal Studios option</li><li>Relax before Hawaii travel</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.universalstudioshollywood.com/">Universal Studios Hollywood</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 3 <span>Saturday</span></div>
+          <h3>Arrive in Kona</h3>
+          <p class="island">Big Island</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Fly LAX → KOA. Check in, grocery stop, explore Kona town, sunset dinner.</p>
+      <div class="details">
+        <ul><li>Fly LAX → KOA</li><li>Check into house</li><li>Grocery stop</li><li>Explore Kona town</li><li>Sunset dinner</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/hawaii-big-island/regions/kona">Explore Kona / Kailua-Kona</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 4 <span>Sunday</span></div>
+          <h3>Beach + Snorkeling Day</h3>
+          <p class="island">Big Island</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Kahaluʻu Beach Park snorkeling and Magic Sands Beach.</p>
+      <div class="details">
+        <ul><li>Kahaluʻu Beach Park snorkeling</li><li>Magic Sands Beach</li><li>Relaxed dinner</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.kahaluu.org/">Kahaluʻu Beach Park</a><a target="_blank" href="https://www.gohawaii.com/listing/laaloa-magic-sands-beach/442">Magic Sands Beach</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 5 <span>Monday</span></div>
+          <h3>Volcanoes + Manta Ray Night Snorkel</h3>
+          <p class="island">Big Island</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Maybe: Hawaiʻi Volcanoes National Park during the day. Must-do: Manta Ray Night Snorkel in the evening.</p>
+      <div class="details">
+        <ul><li>Early drive to Hawaiʻi Volcanoes National Park if the group is up for it</li><li>Thurston Lava Tube / Kīlauea overlooks</li><li>Return to Kona</li><li>Evening Manta Ray Night Snorkel</li></ul>
+        <div class="note"><strong>Booking note:</strong> Priority booking: reserve the manta ray night snorkel early. Pick an earlier evening tour if available so you have flexibility if weather affects the tour.</div>
+        <div class="links"><a target="_blank" href="https://konasnorkeltrips.com/snorkel-tours/manta-ray-snorkel-kona/">Book: Kona Snorkel Trips — Manta Ray Night Snorkel</a><a target="_blank" href="https://www.nps.gov/havo/index.htm">Hawaiʻi Volcanoes National Park</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 6 <span>Tuesday</span></div>
+          <h3>Mauna Kea Sunset + Stargazing</h3>
+          <p class="island">Big Island</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Easy morning, then Mauna Kea sunset and stargazing tour.</p>
+      <div class="details">
+        <ul><li>Sleep in / relaxed morning</li><li>Lunch in Kona</li><li>Afternoon pickup or drive to tour meeting point</li><li>Mauna Kea sunset</li><li>Stargazing after dark</li></ul>
+        <div class="note"><strong>Booking note:</strong> Bring warm clothes. It can be surprisingly cold at elevation.</div>
+        <div class="links"><a target="_blank" href="https://maunakea.com/">Book: Mauna Kea Summit Adventures</a><a target="_blank" href="https://maunakeasunset.com/">Alternative: Mauna Kea Sunset</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 7 <span>Wednesday</span></div>
+          <h3>Travel to Kauai</h3>
+          <p class="island">Kauai</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Fly KOA → LIH. Check in, beach, dinner.</p>
+      <div class="details">
+        <ul><li>Fly KOA → LIH</li><li>Check in</li><li>Nearby beach</li><li>Easy dinner</li></ul>
+        
+        
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 8 <span>Thursday</span></div>
+          <h3>Nā Pali Coast Helicopter Tour</h3>
+          <p class="island">Kauai</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Must-do: morning helicopter tour over Nā Pali Coast, Waimea Canyon, waterfalls, and the North Shore.</p>
+      <div class="details">
+        <ul><li>Morning helicopter tour</li><li>Relaxing afternoon</li><li>Casual dinner</li></ul>
+        <div class="note"><strong>Booking note:</strong> Morning flights are usually preferred for calmer air and visibility. Book early and leave flexibility in case weather requires rescheduling.</div>
+        <div class="links"><a target="_blank" href="https://helicopters-kauai.com/">Book: Jack Harter Helicopters</a><a target="_blank" href="https://www.bluehawaiian.com/kauai/">Compare: Blue Hawaiian Kauai</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 9 <span>Friday</span></div>
+          <h3>Waimea Canyon + Kōkeʻe</h3>
+          <p class="island">Kauai</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Drive Waimea Canyon overlooks and continue to Kōkeʻe State Park if the weather is clear.</p>
+      <div class="details">
+        <ul><li>Waimea Canyon Lookout</li><li>Puʻu Hinahina Lookout</li><li>Kōkeʻe State Park</li><li>Optional short hike or lunch stop</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://dlnr.hawaii.gov/dsp/parks/kauai/waimea-canyon-state-park/">Waimea Canyon State Park</a><a target="_blank" href="https://dlnr.hawaii.gov/dsp/parks/kauai/kokee-state-park/">Kōkeʻe State Park</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 10 <span>Saturday</span></div>
+          <h3>Flexible Adventure Day</h3>
+          <p class="island">Kauai</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Choose Secret Falls kayak/waterfall hike or Nā Pali Coast sunset boat cruise.</p>
+      <div class="details">
+        <ul><li>Option A: Wailua River kayak + Secret Falls</li><li>Option B: Nā Pali Coast sunset boat cruise</li><li>Option C: Beach/rest day</li></ul>
+        <div class="note"><strong>Booking note:</strong> My lean: if the group wants a second wow-factor experience, do the Nā Pali sunset boat cruise. If you want active/adventure, do Secret Falls.</div>
+        <div class="links"><a target="_blank" href="https://kayakkauai.com/">Book: Kayak Kauai — Secret Falls</a><a target="_blank" href="https://www.holoholokauaiboattours.com/">Book: Holo Holo Charters — Nā Pali Sunset</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 11 <span>Sunday</span></div>
+          <h3>Beach / Hanalei Day</h3>
+          <p class="island">Kauai</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Unscheduled day for Hanalei, beaches, shopping, and relaxing.</p>
+      <div class="details">
+        <ul><li>Hanalei town</li><li>Beach time</li><li>Shopping / shave ice</li><li>Casual dinner</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/kauai/regions/north-shore/hanalei">Hanalei Bay</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 12 <span>Monday</span></div>
+          <h3>Travel to Maui</h3>
+          <p class="island">Maui</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Fly LIH → OGG. Check in, Wailea/Kihei beach, dinner.</p>
+      <div class="details">
+        <ul><li>Fly LIH → OGG</li><li>Check in</li><li>Wailea or Kihei beach</li><li>Dinner</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.theshopsatwailea.com/">Shops at Wailea</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 13 <span>Tuesday</span></div>
+          <h3>Molokini + Turtle Town Snorkel</h3>
+          <p class="island">Maui</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Snorkel cruise to Molokini and Turtle Town for coral, fish, and sea turtles.</p>
+      <div class="details">
+        <ul><li>Morning snorkel cruise</li><li>Afternoon pool/beach</li><li>Dinner in Wailea/Kihei</li></ul>
+        <div class="note"><strong>Booking note:</strong> This is the easiest way to combine snorkeling and sea turtles, but you may also see turtles from beaches around South Maui.</div>
+        <div class="links"><a target="_blank" href="https://sailtrilogy.com/tour/discover-molokini">Book: Trilogy — Discover Molokini</a><a target="_blank" href="https://pacwhale.com/ecotour/molokini-turtle-arches-snorkel/">Compare: Pacific Whale Foundation</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 14 <span>Wednesday</span></div>
+          <h3>Road to Hana</h3>
+          <p class="island">Maui</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Full-day Road to Hana. Leave early and do not overpack the stops.</p>
+      <div class="details">
+        <ul><li>Leave early</li><li>Waterfalls / scenic stops</li><li>Black sand beach if reservations are available</li><li>Return before too late</li></ul>
+        <div class="note"><strong>Booking note:</strong> If you want to avoid driving, book a guided tour. If driving yourself, keep the plan simple.</div>
+        <div class="links"><a target="_blank" href="https://gostateparks.hawaii.gov/waianapanapa">Waiʻānapanapa State Park Reservations</a><a target="_blank" href="https://www.gohawaii.com/islands/maui/regions/east-maui/road-to-hana">Road to Hana official overview</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 15 <span>Thursday</span></div>
+          <h3>Beach / Resort Day</h3>
+          <p class="island">Maui</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Relaxing beach day, Shops at Wailea, pool time, and easy dinner.</p>
+      <div class="details">
+        <ul><li>Wailea Beach or Ulua Beach</li><li>Pool/resort time</li><li>Shops at Wailea</li><li>Sunset dinner</li></ul>
+        
+        <div class="links"><a target="_blank" href="https://www.gohawaii.com/listing/wailea-beach/442">Wailea Beach</a><a target="_blank" href="https://www.gohawaii.com/listing/ulua-beach/442">Ulua Beach</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 16 <span>Friday</span></div>
+          <h3>Haleakalā Sunset + Stargazing</h3>
+          <p class="island">Maui</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Sunset above the clouds and stargazing after dark.</p>
+      <div class="details">
+        <ul><li>Relaxed morning</li><li>Early dinner/snacks packed</li><li>Drive to Haleakalā</li><li>Sunset above the clouds</li><li>Stay for stars after dark</li></ul>
+        <div class="note"><strong>Booking note:</strong> Sunset does not require the same sunrise reservation, but check park information before the trip.</div>
+        <div class="links"><a target="_blank" href="https://www.nps.gov/hale/index.htm">Haleakalā National Park</a></div>
+      </div>
+    </article>
+    
+
+    <article class="day-card" data-island="Travel Home" style="--accent:#475569">
+      <div class="day-top">
+        <div>
+          <div class="date">Oct. 17 <span>Saturday</span></div>
+          <h3>Maui → Pittsburgh</h3>
+          <p class="island">Travel Home</p>
+        </div>
+        <button onclick="toggleCard(this)">Details</button>
+      </div>
+      <p class="summary">Breakfast, beach if time allows, fly home.</p>
+      <div class="details">
+        <ul><li>Breakfast</li><li>Final beach walk if time allows</li><li>Fly OGG → PIT</li></ul>
+        
+        
+      </div>
+    </article>
+    
+    </div>
+  </section>
+
+  <section id="bookings">
+    <div class="section-title">
+      <div>
+        <h2>Recommended Booking Links</h2>
+        <p>These are the key reservations to make first.</p>
+      </div>
+    </div>
+    <div class="booking-grid">
+      
+    <div class="booking-card">
+      <h3>Manta Ray Night Snorkel</h3>
+      <p><strong>Big Island</strong> · Recommended: Kona Snorkel Trips</p>
+      <p>Must-book. Use Oct. 5 evening.</p>
+      <a target="_blank" href="https://konasnorkeltrips.com/snorkel-tours/manta-ray-snorkel-kona/">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Mauna Kea Sunset + Stargazing</h3>
+      <p><strong>Big Island</strong> · Recommended: Mauna Kea Summit Adventures</p>
+      <p>Book guided tour unless you are very comfortable with the drive and vehicle requirements.</p>
+      <a target="_blank" href="https://maunakea.com/">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Nā Pali Coast Helicopter</h3>
+      <p><strong>Kauai</strong> · Recommended: Jack Harter Helicopters</p>
+      <p>Book morning flight and leave weather flexibility.</p>
+      <a target="_blank" href="https://helicopters-kauai.com/">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Secret Falls Kayak</h3>
+      <p><strong>Kauai</strong> · Recommended: Kayak Kauai</p>
+      <p>Optional active adventure day.</p>
+      <a target="_blank" href="https://kayakkauai.com/">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Nā Pali Sunset Boat</h3>
+      <p><strong>Kauai</strong> · Recommended: Holo Holo Charters</p>
+      <p>Alternative to Secret Falls; better if you want scenic/wow factor.</p>
+      <a target="_blank" href="https://www.holoholokauaiboattours.com/">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Molokini + Turtle Town</h3>
+      <p><strong>Maui</strong> · Recommended: Trilogy Excursions</p>
+      <p>Best fit for snorkeling + turtles.</p>
+      <a target="_blank" href="https://sailtrilogy.com/tour/discover-molokini">Open booking link</a>
+    </div>
+
+
+    <div class="booking-card">
+      <h3>Waiʻānapanapa Black Sand Beach</h3>
+      <p><strong>Maui</strong> · Recommended: Hawaii State Parks</p>
+      <p>Reserve if including this stop on Road to Hana.</p>
+      <a target="_blank" href="https://gostateparks.hawaii.gov/waianapanapa">Open booking link</a>
+    </div>
+
+    </div>
+  </section>
+
+  <section id="checklist">
+    <div class="section-title">
+      <div>
+        <h2>Trip Checklist</h2>
+        <p>Use this as a planning dashboard.</p>
+      </div>
+    </div>
+    <div class="checklist">
+      <label><input type="checkbox"> Book Manta Ray Night Snorkel for Oct. 5</label>
+      <label><input type="checkbox"> Book Nā Pali Coast helicopter tour for Oct. 8</label>
+      <label><input type="checkbox"> Book Mauna Kea sunset/stargazing tour for Oct. 6</label>
+      <label><input type="checkbox"> Decide: Secret Falls kayak vs Nā Pali sunset boat cruise</label>
+      <label><input type="checkbox"> Book Molokini + Turtle Town snorkel cruise</label>
+      <label><input type="checkbox"> Decide whether Road to Hana will be self-drive or guided</label>
+      <label><input type="checkbox"> Reserve Waiʻānapanapa if doing black sand beach on Road to Hana</label>
+      <label><input type="checkbox"> Add dinner reservations once lodging is finalized</label>
+      <label><input type="checkbox"> Pack warm clothes for Mauna Kea and Haleakalā</label>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Custom Hawaii travel dashboard · Save this file and keep it open as a browser tab.
+</footer>
+
+<script>
+function toggleCard(btn) {
+  const details = btn.closest('.day-card').querySelector('.details');
+  details.classList.toggle('open');
+  btn.textContent = details.classList.contains('open') ? 'Hide' : 'Details';
+}
+function filterIsland(island) {
+  const cards = document.querySelectorAll('.day-card');
+  cards.forEach(card => {
+    const cardIsland = card.getAttribute('data-island');
+    if (island === 'All' || cardIsland === island) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
