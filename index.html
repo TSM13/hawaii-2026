@@ -21,9 +21,10 @@ body {
   line-height: 1.5;
 }
 header {
-  background: linear-gradient(135deg, #0f766e, #0284c7 55%, #7c3aed);
+  position: relative;
+  background: linear-gradient(135deg, rgba(15,118,110,.86), rgba(2,132,199,.78) 55%, rgba(124,58,237,.86)), url('images/kauai.jpg') center 40% / cover no-repeat;
   color: white;
-  padding: 42px 22px;
+  padding: 54px 22px 46px;
 }
 .header-inner {
   max-width: 1100px;
@@ -33,12 +34,43 @@ h1 {
   margin: 0;
   font-size: 42px;
   letter-spacing: -0.03em;
+  text-shadow: 0 2px 18px rgba(0,0,0,.35);
 }
 .subtitle {
   font-size: 18px;
-  opacity: .95;
+  opacity: .97;
   margin-top: 8px;
+  text-shadow: 0 1px 10px rgba(0,0,0,.35);
 }
+
+/* Countdown */
+.countdown {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.countdown .cd-label {
+  font-size: 14px;
+  opacity: .95;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.cd-boxes { display: flex; gap: 10px; }
+.cd-box {
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 14px;
+  padding: 10px 14px;
+  min-width: 64px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+.cd-box span { display:block; font-size: 28px; font-weight: 800; line-height: 1; }
+.cd-box small { display:block; font-size: 12px; opacity: .9; margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+.cd-done { font-size: 22px; font-weight: 800; }
+
 .quick-grid {
   margin-top: 24px;
   display: grid;
@@ -82,17 +114,68 @@ nav {
   cursor: pointer;
 }
 .nav-inner a:hover, .filter-btn:hover { background:#f1f5f9; }
+.filter-btn.active { background:#0f766e; color:white; border-color:#0f766e; }
 main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 26px 16px 60px;
 }
+
+/* Island hero banners */
+.islands { margin-top: 20px; }
+.island-hero {
+  position: relative;
+  min-height: 62vh;
+  border-radius: 22px;
+  overflow: hidden;
+  margin: 16px 0;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  box-shadow: 0 8px 26px rgba(15,23,42,.16);
+  background-size: cover;
+  background-position: center;
+}
+.island-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2,6,23,.82) 0%, rgba(2,6,23,.25) 45%, rgba(2,6,23,.05) 100%);
+}
+.island-hero .ih-content {
+  position: relative;
+  z-index: 1;
+  padding: 26px 26px 28px;
+  width: 100%;
+}
+.island-hero h2 {
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: -.02em;
+  text-shadow: 0 2px 16px rgba(0,0,0,.5);
+}
+.island-hero .ih-dates { font-size: 16px; font-weight: 700; opacity: .96; margin-top: 4px; }
+.island-hero .ih-highlights { margin: 8px 0 16px; font-size: 15px; opacity: .95; }
+.ih-btn {
+  display: inline-block;
+  background: white;
+  color: #0f172a;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.ih-btn:hover { background: #e2e8f0; }
+
 .section-title {
   display:flex;
   align-items:end;
   justify-content:space-between;
   gap: 12px;
-  margin-top: 22px;
+  margin-top: 34px;
 }
 .section-title h2 {
   margin:0;
@@ -180,6 +263,14 @@ button {
   font-weight: 700;
   font-size: 14px;
 }
+.map-wrap { margin-top: 12px; }
+.map-wrap iframe {
+  width: 100%;
+  height: 240px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.map-wrap .map-cap { font-size: 12px; color: var(--muted); margin-top: 6px; }
 .booking-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -201,12 +292,30 @@ button {
   padding:18px;
   margin-top:18px;
 }
-.checklist label {
+.person-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.person-row label { font-weight: 700; }
+.person-row input[type="text"] {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 15px;
+  min-width: 220px;
+}
+.person-row .saved-note { font-size: 13px; color: #16a34a; font-weight: 700; }
+.checklist-items label {
   display:block;
   padding: 9px 0;
   border-bottom:1px solid #f1f5f9;
 }
-.checklist label:last-child { border-bottom:0; }
+.checklist-items label:last-child { border-bottom:0; }
 footer {
   color: var(--muted);
   text-align:center;
@@ -216,10 +325,15 @@ footer {
 @media (max-width: 800px) {
   h1 { font-size: 32px; }
   .quick-grid, .day-grid, .booking-grid { grid-template-columns: 1fr; }
+  .island-hero { min-height: 54vh; }
+  .island-hero h2 { font-size: 30px; }
+  .cd-box { min-width: 56px; padding: 8px 10px; }
+  .cd-box span { font-size: 22px; }
 }
 @media print {
-  nav, button { display:none; }
+  nav, button, .countdown, .island-hero, .map-wrap { display:none; }
   body { background:white; }
+  header { background: #0f766e; }
   .day-grid, .booking-grid { display:block; }
   .day-card, .booking-card { break-inside: avoid; margin-bottom: 12px; box-shadow:none; }
   .details { display:block; }
@@ -231,6 +345,17 @@ footer {
   <div class="header-inner">
     <h1>Hawaii 2026 Custom Travel Website</h1>
     <div class="subtitle">Los Angeles · Big Island · Kauai · Maui | Oct. 1-17, 2026</div>
+
+    <div class="countdown" id="countdown">
+      <span class="cd-label">Countdown to departure</span>
+      <div class="cd-boxes">
+        <div class="cd-box"><span id="cd-days">--</span><small>days</small></div>
+        <div class="cd-box"><span id="cd-hours">--</span><small>hours</small></div>
+        <div class="cd-box"><span id="cd-mins">--</span><small>mins</small></div>
+        <div class="cd-box"><span id="cd-secs">--</span><small>secs</small></div>
+      </div>
+    </div>
+
     <div class="quick-grid">
       <div class="quick"><strong>Big Island</strong><span>Oct. 3-7 · Manta rays, Mauna Kea, Kona</span></div>
       <div class="quick"><strong>Kauai</strong><span>Oct. 7-12 · Nā Pali, Waimea Canyon, Hanalei</span></div>
@@ -242,27 +367,64 @@ footer {
 
 <nav>
   <div class="nav-inner">
+    <a href="#islands">Islands</a>
     <a href="#itinerary">Daily Itinerary</a>
     <a href="#bookings">Booking Links</a>
     <a href="#checklist">Trip Checklist</a>
-    <button class="filter-btn" onclick="filterIsland('All')">All</button>
-    <button class="filter-btn" onclick="filterIsland('Big Island')">Big Island</button>
-    <button class="filter-btn" onclick="filterIsland('Kauai')">Kauai</button>
-    <button class="filter-btn" onclick="filterIsland('Maui')">Maui</button>
+    <button class="filter-btn" onclick="filterIsland('All', this)">All</button>
+    <button class="filter-btn" onclick="filterIsland('Big Island', this)">Big Island</button>
+    <button class="filter-btn" onclick="filterIsland('Kauai', this)">Kauai</button>
+    <button class="filter-btn" onclick="filterIsland('Maui', this)">Maui</button>
   </div>
 </nav>
 
 <main>
+  <section id="islands" class="islands">
+    <div class="section-title">
+      <div>
+        <h2>The Islands</h2>
+        <p>Three islands, sixteen days. Tap an island to jump to those days.</p>
+      </div>
+    </div>
+
+    <div class="island-hero" style="background-image:url('images/bigisland.jpg')">
+      <div class="ih-content">
+        <h2>Big Island</h2>
+        <div class="ih-dates">Oct. 3 – 7, 2026</div>
+        <div class="ih-highlights">Manta ray night snorkel · Mauna Kea stargazing · Kona · Volcanoes National Park</div>
+        <button class="ih-btn" onclick="goIsland('Big Island')">See these days →</button>
+      </div>
+    </div>
+
+    <div class="island-hero" style="background-image:url('images/kauai.jpg')">
+      <div class="ih-content">
+        <h2>Kauai</h2>
+        <div class="ih-dates">Oct. 7 – 12, 2026</div>
+        <div class="ih-highlights">Nā Pali Coast helicopter · Waimea Canyon · Hanalei · Secret Falls</div>
+        <button class="ih-btn" onclick="goIsland('Kauai')">See these days →</button>
+      </div>
+    </div>
+
+    <div class="island-hero" style="background-image:url('images/maui.jpg')">
+      <div class="ih-content">
+        <h2>Maui</h2>
+        <div class="ih-dates">Oct. 12 – 17, 2026</div>
+        <div class="ih-highlights">Molokini + Turtle Town · Road to Hana · Haleakalā sunset</div>
+        <button class="ih-btn" onclick="goIsland('Maui')">See these days →</button>
+      </div>
+    </div>
+  </section>
+
   <section id="itinerary">
     <div class="section-title">
       <div>
         <h2>Daily Itinerary</h2>
-        <p>Click “Details” on any day to see stops, notes, and booking links.</p>
+        <p>Click “Details” on any day to see stops, a map, notes, and booking links.</p>
       </div>
     </div>
     <div class="day-grid" id="dayGrid">
-      
-    <article class="day-card" data-island="Travel / Los Angeles" style="--accent:#0284c7">
+
+    <article class="day-card" data-island="Travel / Los Angeles" data-map="Los Angeles International Airport" style="--accent:#0284c7">
       <div class="day-top">
         <div>
           <div class="date">Oct. 1 <span>Thursday</span></div>
@@ -274,13 +436,11 @@ footer {
       <p class="summary">Fly PIT → LAX. Check in and relax.</p>
       <div class="details">
         <ul><li>Fly PIT → LAX</li><li>Check in</li><li>Casual dinner near hotel</li></ul>
-        
-        
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Los Angeles" style="--accent:#0284c7">
+
+    <article class="day-card" data-island="Los Angeles" data-map="Universal Studios Hollywood" style="--accent:#0284c7">
       <div class="day-top">
         <div>
           <div class="date">Oct. 2 <span>Friday</span></div>
@@ -292,13 +452,12 @@ footer {
       <p class="summary">Optional Universal Studios day or easy travel-recovery day.</p>
       <div class="details">
         <ul><li>Universal Studios option</li><li>Relax before Hawaii travel</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.universalstudioshollywood.com/">Universal Studios Hollywood</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+
+    <article class="day-card" data-island="Big Island" data-map="Kailua-Kona, Hawaii" style="--accent:#dc2626">
       <div class="day-top">
         <div>
           <div class="date">Oct. 3 <span>Saturday</span></div>
@@ -310,13 +469,12 @@ footer {
       <p class="summary">Fly LAX → KOA. Check in, grocery stop, explore Kona town, sunset dinner.</p>
       <div class="details">
         <ul><li>Fly LAX → KOA</li><li>Check into house</li><li>Grocery stop</li><li>Explore Kona town</li><li>Sunset dinner</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/hawaii-big-island/regions/kona">Explore Kona / Kailua-Kona</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+
+    <article class="day-card" data-island="Big Island" data-map="Kahaluu Beach Park, Kailua-Kona, HI" style="--accent:#dc2626">
       <div class="day-top">
         <div>
           <div class="date">Oct. 4 <span>Sunday</span></div>
@@ -328,13 +486,12 @@ footer {
       <p class="summary">Kahaluʻu Beach Park snorkeling and Magic Sands Beach.</p>
       <div class="details">
         <ul><li>Kahaluʻu Beach Park snorkeling</li><li>Magic Sands Beach</li><li>Relaxed dinner</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.kahaluu.org/">Kahaluʻu Beach Park</a><a target="_blank" href="https://www.gohawaii.com/listing/laaloa-magic-sands-beach/442">Magic Sands Beach</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+
+    <article class="day-card" data-island="Big Island" data-map="Hawaii Volcanoes National Park" style="--accent:#dc2626">
       <div class="day-top">
         <div>
           <div class="date">Oct. 5 <span>Monday</span></div>
@@ -350,9 +507,9 @@ footer {
         <div class="links"><a target="_blank" href="https://konasnorkeltrips.com/snorkel-tours/manta-ray-snorkel-kona/">Book: Kona Snorkel Trips — Manta Ray Night Snorkel</a><a target="_blank" href="https://www.nps.gov/havo/index.htm">Hawaiʻi Volcanoes National Park</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Big Island" style="--accent:#dc2626">
+
+    <article class="day-card" data-island="Big Island" data-map="Mauna Kea, Hawaii" style="--accent:#dc2626">
       <div class="day-top">
         <div>
           <div class="date">Oct. 6 <span>Tuesday</span></div>
@@ -368,9 +525,9 @@ footer {
         <div class="links"><a target="_blank" href="https://maunakea.com/">Book: Mauna Kea Summit Adventures</a><a target="_blank" href="https://maunakeasunset.com/">Alternative: Mauna Kea Sunset</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+
+    <article class="day-card" data-island="Kauai" data-map="Lihue Airport, Kauai" style="--accent:#16a34a">
       <div class="day-top">
         <div>
           <div class="date">Oct. 7 <span>Wednesday</span></div>
@@ -382,13 +539,11 @@ footer {
       <p class="summary">Fly KOA → LIH. Check in, beach, dinner.</p>
       <div class="details">
         <ul><li>Fly KOA → LIH</li><li>Check in</li><li>Nearby beach</li><li>Easy dinner</li></ul>
-        
-        
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+
+    <article class="day-card" data-island="Kauai" data-map="Na Pali Coast State Wilderness Park, Kauai" style="--accent:#16a34a">
       <div class="day-top">
         <div>
           <div class="date">Oct. 8 <span>Thursday</span></div>
@@ -404,9 +559,9 @@ footer {
         <div class="links"><a target="_blank" href="https://helicopters-kauai.com/">Book: Jack Harter Helicopters</a><a target="_blank" href="https://www.bluehawaiian.com/kauai/">Compare: Blue Hawaiian Kauai</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+
+    <article class="day-card" data-island="Kauai" data-map="Waimea Canyon State Park, Kauai" style="--accent:#16a34a">
       <div class="day-top">
         <div>
           <div class="date">Oct. 9 <span>Friday</span></div>
@@ -418,13 +573,12 @@ footer {
       <p class="summary">Drive Waimea Canyon overlooks and continue to Kōkeʻe State Park if the weather is clear.</p>
       <div class="details">
         <ul><li>Waimea Canyon Lookout</li><li>Puʻu Hinahina Lookout</li><li>Kōkeʻe State Park</li><li>Optional short hike or lunch stop</li></ul>
-        
         <div class="links"><a target="_blank" href="https://dlnr.hawaii.gov/dsp/parks/kauai/waimea-canyon-state-park/">Waimea Canyon State Park</a><a target="_blank" href="https://dlnr.hawaii.gov/dsp/parks/kauai/kokee-state-park/">Kōkeʻe State Park</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+
+    <article class="day-card" data-island="Kauai" data-map="Wailua River State Park, Kauai" style="--accent:#16a34a">
       <div class="day-top">
         <div>
           <div class="date">Oct. 10 <span>Saturday</span></div>
@@ -440,9 +594,9 @@ footer {
         <div class="links"><a target="_blank" href="https://kayakkauai.com/">Book: Kayak Kauai — Secret Falls</a><a target="_blank" href="https://www.holoholokauaiboattours.com/">Book: Holo Holo Charters — Nā Pali Sunset</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Kauai" style="--accent:#16a34a">
+
+    <article class="day-card" data-island="Kauai" data-map="Hanalei, Kauai, HI" style="--accent:#16a34a">
       <div class="day-top">
         <div>
           <div class="date">Oct. 11 <span>Sunday</span></div>
@@ -454,13 +608,12 @@ footer {
       <p class="summary">Unscheduled day for Hanalei, beaches, shopping, and relaxing.</p>
       <div class="details">
         <ul><li>Hanalei town</li><li>Beach time</li><li>Shopping / shave ice</li><li>Casual dinner</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/kauai/regions/north-shore/hanalei">Hanalei Bay</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+
+    <article class="day-card" data-island="Maui" data-map="Kahului Airport, Maui" style="--accent:#7c3aed">
       <div class="day-top">
         <div>
           <div class="date">Oct. 12 <span>Monday</span></div>
@@ -472,13 +625,12 @@ footer {
       <p class="summary">Fly LIH → OGG. Check in, Wailea/Kihei beach, dinner.</p>
       <div class="details">
         <ul><li>Fly LIH → OGG</li><li>Check in</li><li>Wailea or Kihei beach</li><li>Dinner</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.theshopsatwailea.com/">Shops at Wailea</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+
+    <article class="day-card" data-island="Maui" data-map="Molokini, Maui" style="--accent:#7c3aed">
       <div class="day-top">
         <div>
           <div class="date">Oct. 13 <span>Tuesday</span></div>
@@ -494,9 +646,9 @@ footer {
         <div class="links"><a target="_blank" href="https://sailtrilogy.com/tour/discover-molokini">Book: Trilogy — Discover Molokini</a><a target="_blank" href="https://pacwhale.com/ecotour/molokini-turtle-arches-snorkel/">Compare: Pacific Whale Foundation</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+
+    <article class="day-card" data-island="Maui" data-map="Hana Highway, Maui" style="--accent:#7c3aed">
       <div class="day-top">
         <div>
           <div class="date">Oct. 14 <span>Wednesday</span></div>
@@ -512,9 +664,9 @@ footer {
         <div class="links"><a target="_blank" href="https://gostateparks.hawaii.gov/waianapanapa">Waiʻānapanapa State Park Reservations</a><a target="_blank" href="https://www.gohawaii.com/islands/maui/regions/east-maui/road-to-hana">Road to Hana official overview</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+
+    <article class="day-card" data-island="Maui" data-map="Wailea Beach, Maui" style="--accent:#7c3aed">
       <div class="day-top">
         <div>
           <div class="date">Oct. 15 <span>Thursday</span></div>
@@ -526,13 +678,12 @@ footer {
       <p class="summary">Relaxing beach day, Shops at Wailea, pool time, and easy dinner.</p>
       <div class="details">
         <ul><li>Wailea Beach or Ulua Beach</li><li>Pool/resort time</li><li>Shops at Wailea</li><li>Sunset dinner</li></ul>
-        
         <div class="links"><a target="_blank" href="https://www.gohawaii.com/listing/wailea-beach/442">Wailea Beach</a><a target="_blank" href="https://www.gohawaii.com/listing/ulua-beach/442">Ulua Beach</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Maui" style="--accent:#7c3aed">
+
+    <article class="day-card" data-island="Maui" data-map="Haleakala National Park" style="--accent:#7c3aed">
       <div class="day-top">
         <div>
           <div class="date">Oct. 16 <span>Friday</span></div>
@@ -548,9 +699,9 @@ footer {
         <div class="links"><a target="_blank" href="https://www.nps.gov/hale/index.htm">Haleakalā National Park</a></div>
       </div>
     </article>
-    
 
-    <article class="day-card" data-island="Travel Home" style="--accent:#475569">
+
+    <article class="day-card" data-island="Travel Home" data-map="Kahului Airport, Maui" style="--accent:#475569">
       <div class="day-top">
         <div>
           <div class="date">Oct. 17 <span>Saturday</span></div>
@@ -562,11 +713,9 @@ footer {
       <p class="summary">Breakfast, beach if time allows, fly home.</p>
       <div class="details">
         <ul><li>Breakfast</li><li>Final beach walk if time allows</li><li>Fly OGG → PIT</li></ul>
-        
-        
       </div>
     </article>
-    
+
     </div>
   </section>
 
@@ -578,7 +727,7 @@ footer {
       </div>
     </div>
     <div class="booking-grid">
-      
+
     <div class="booking-card">
       <h3>Manta Ray Night Snorkel</h3>
       <p><strong>Big Island</strong> · Recommended: Kona Snorkel Trips</p>
@@ -641,44 +790,153 @@ footer {
     <div class="section-title">
       <div>
         <h2>Trip Checklist</h2>
-        <p>Use this as a planning dashboard.</p>
+        <p>Enter your name and your progress saves automatically in this browser.</p>
       </div>
     </div>
     <div class="checklist">
-      <label><input type="checkbox"> Book Manta Ray Night Snorkel for Oct. 5</label>
-      <label><input type="checkbox"> Book Nā Pali Coast helicopter tour for Oct. 8</label>
-      <label><input type="checkbox"> Book Mauna Kea sunset/stargazing tour for Oct. 6</label>
-      <label><input type="checkbox"> Decide: Secret Falls kayak vs Nā Pali sunset boat cruise</label>
-      <label><input type="checkbox"> Book Molokini + Turtle Town snorkel cruise</label>
-      <label><input type="checkbox"> Decide whether Road to Hana will be self-drive or guided</label>
-      <label><input type="checkbox"> Reserve Waiʻānapanapa if doing black sand beach on Road to Hana</label>
-      <label><input type="checkbox"> Add dinner reservations once lodging is finalized</label>
-      <label><input type="checkbox"> Pack warm clothes for Mauna Kea and Haleakalā</label>
+      <div class="person-row">
+        <label for="person">Who's checking?</label>
+        <input type="text" id="person" placeholder="Enter your name (e.g. Mom, Dad, Alex)" autocomplete="off">
+        <span class="saved-note" id="savedNote"></span>
+      </div>
+      <div class="checklist-items" id="checklistItems">
+        <label><input type="checkbox" data-key="book-manta"> Book Manta Ray Night Snorkel for Oct. 5</label>
+        <label><input type="checkbox" data-key="book-heli"> Book Nā Pali Coast helicopter tour for Oct. 8</label>
+        <label><input type="checkbox" data-key="book-maunakea"> Book Mauna Kea sunset/stargazing tour for Oct. 6</label>
+        <label><input type="checkbox" data-key="decide-kayak-boat"> Decide: Secret Falls kayak vs Nā Pali sunset boat cruise</label>
+        <label><input type="checkbox" data-key="book-molokini"> Book Molokini + Turtle Town snorkel cruise</label>
+        <label><input type="checkbox" data-key="decide-hana"> Decide whether Road to Hana will be self-drive or guided</label>
+        <label><input type="checkbox" data-key="reserve-waianapanapa"> Reserve Waiʻānapanapa if doing black sand beach on Road to Hana</label>
+        <label><input type="checkbox" data-key="dinner-reservations"> Add dinner reservations once lodging is finalized</label>
+        <label><input type="checkbox" data-key="pack-warm"> Pack warm clothes for Mauna Kea and Haleakalā</label>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  Custom Hawaii travel dashboard · Save this file and keep it open as a browser tab.
+  Custom Hawaii travel dashboard · Bookmark this page and share it with the family.
 </footer>
 
 <script>
+/* ---------- Day details toggle + lazy-loaded map ---------- */
 function toggleCard(btn) {
-  const details = btn.closest('.day-card').querySelector('.details');
+  const card = btn.closest('.day-card');
+  const details = card.querySelector('.details');
   details.classList.toggle('open');
   btn.textContent = details.classList.contains('open') ? 'Hide' : 'Details';
-}
-function filterIsland(island) {
-  const cards = document.querySelectorAll('.day-card');
-  cards.forEach(card => {
-    const cardIsland = card.getAttribute('data-island');
-    if (island === 'All' || cardIsland === island) {
-      card.style.display = '';
-    } else {
-      card.style.display = 'none';
+
+  if (details.classList.contains('open') && !details.querySelector('.map-wrap')) {
+    const q = card.getAttribute('data-map');
+    if (q) {
+      const wrap = document.createElement('div');
+      wrap.className = 'map-wrap';
+      const iframe = document.createElement('iframe');
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.src = 'https://www.google.com/maps?q=' + encodeURIComponent(q) + '&output=embed';
+      const cap = document.createElement('div');
+      cap.className = 'map-cap';
+      cap.textContent = '📍 ' + q;
+      wrap.appendChild(iframe);
+      wrap.appendChild(cap);
+      details.appendChild(wrap);
     }
-  });
+  }
 }
+
+/* ---------- Island filter ---------- */
+function filterIsland(island, btn) {
+  document.querySelectorAll('.day-card').forEach(card => {
+    const cardIsland = card.getAttribute('data-island');
+    card.style.display = (island === 'All' || cardIsland === island) ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      if (b.textContent.trim() === island) b.classList.add('active');
+    });
+  }
+}
+function goIsland(island) {
+  filterIsland(island, null);
+  document.getElementById('itinerary').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ---------- Countdown to departure ---------- */
+(function () {
+  // Departure morning: Oct 1, 2026, 8:00 AM Eastern (Pittsburgh, EDT = UTC-4)
+  const target = new Date('2026-10-01T08:00:00-04:00').getTime();
+  const el = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs'),
+  };
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML =
+        '<span class="cd-done">🌺 Aloha — it\'s trip time! 🌺</span>';
+      clearInterval(timer);
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.days.textContent = d;
+    el.hours.textContent = pad(h);
+    el.mins.textContent = pad(m);
+    el.secs.textContent = pad(s);
+  }
+  tick();
+  const timer = setInterval(tick, 1000);
+})();
+
+/* ---------- Checklist that saves progress per person ---------- */
+(function () {
+  const personInput = document.getElementById('person');
+  const savedNote = document.getElementById('savedNote');
+  const boxes = Array.from(document.querySelectorAll('#checklistItems input[type="checkbox"]'));
+  const PREFIX = 'hawaii2026:checklist:';
+  const LAST = 'hawaii2026:lastPerson';
+
+  function keyFor(name) { return PREFIX + (name || 'default').toLowerCase().trim(); }
+
+  function load(name) {
+    let data = {};
+    try { data = JSON.parse(localStorage.getItem(keyFor(name)) || '{}'); } catch (e) {}
+    boxes.forEach(b => { b.checked = !!data[b.dataset.key]; });
+  }
+  function save() {
+    const name = personInput.value;
+    const data = {};
+    boxes.forEach(b => { data[b.dataset.key] = b.checked; });
+    try {
+      localStorage.setItem(keyFor(name), JSON.stringify(data));
+      localStorage.setItem(LAST, name);
+    } catch (e) {}
+    flashSaved(name);
+  }
+  function flashSaved(name) {
+    const who = (name && name.trim()) ? name.trim() : 'this browser';
+    savedNote.textContent = '✓ Saved for ' + who;
+    clearTimeout(flashSaved._t);
+    flashSaved._t = setTimeout(() => { savedNote.textContent = ''; }, 2000);
+  }
+
+  // restore last-used person and their saved checklist
+  const last = localStorage.getItem(LAST);
+  if (last) personInput.value = last;
+  load(personInput.value);
+
+  personInput.addEventListener('input', () => load(personInput.value));
+  boxes.forEach(b => b.addEventListener('change', save));
+})();
 </script>
 </body>
 </html>
