@@ -271,6 +271,41 @@ button {
   border-radius: 14px;
 }
 .map-wrap .map-cap { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.drive {
+  background:#ecfeff;
+  border:1px solid #a5f3fc;
+  color:#155e75;
+  border-radius:12px;
+  padding:10px 12px;
+  margin:10px 0;
+  font-size:14px;
+}
+.drive a { color:#0e7490; font-weight:700; text-decoration:none; }
+.drive a:hover { text-decoration:underline; }
+.stays-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.stay-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 6px solid var(--accent);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .06);
+}
+.stay-card h3 { margin: 0 0 4px; font-size: 20px; }
+.stay-card .stay-dates { color: var(--accent); font-weight: 800; font-size: 14px; }
+.stay-card .stay-addr { color: var(--muted); font-size: 14px; margin: 8px 0; }
+.stay-card iframe { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 12px; margin-top: 8px; }
+.stay-card.pending { border-top-color: #cbd5e1; background: #f8fafc; }
+.stay-card .stay-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.stay-card .stay-links a {
+  display:inline-block; background:#e0f2fe; color:#075985;
+  border-radius:999px; padding:7px 11px; text-decoration:none; font-weight:700; font-size:13px;
+}
 .booking-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -368,6 +403,7 @@ footer {
 <nav>
   <div class="nav-inner">
     <a href="#islands">Islands</a>
+    <a href="#stays">Where We're Staying</a>
     <a href="#itinerary">Daily Itinerary</a>
     <a href="#bookings">Booking Links</a>
     <a href="#checklist">Trip Checklist</a>
@@ -412,6 +448,45 @@ footer {
         <div class="ih-highlights">Molokini + Turtle Town · Road to Hana · Haleakalā sunset</div>
         <button class="ih-btn" onclick="goIsland('Maui')">See these days →</button>
       </div>
+    </div>
+  </section>
+
+  <section id="stays">
+    <div class="section-title">
+      <div>
+        <h2>Where We're Staying</h2>
+        <p>Our home base on each island, with maps and drive context.</p>
+      </div>
+    </div>
+    <div class="stays-grid">
+
+      <div class="stay-card" style="--accent:#dc2626">
+        <div class="stay-dates">Oct. 3 – 7, 2026</div>
+        <h3>Big Island — Mauna Lani</h3>
+        <p class="stay-addr">68-1050 Mauna Lani Point Drive<br>Kohala Coast (Waimea/Kamuela), HI 96743</p>
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=68-1050%20Mauna%20Lani%20Point%20Drive%2C%20Waimea%2C%20HI%2096743&output=embed"></iframe>
+        <div class="stay-links">
+          <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Kona+International+Airport&destination=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743">Airport → house directions</a>
+          <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Foodland+Farms+Shops+at+Mauna+Lani">Nearest grocery</a>
+        </div>
+        <div class="drive" style="margin-top:12px">
+          <strong>Home base note:</strong> This is on the Kohala Coast, about <strong>30 min north of Kona town</strong> and ~20 min from Kona airport (KOA). Closest groceries are Foodland Farms at the Shops at Mauna Lani (~5 min). Great for Mauna Kea (~1 hr via Saddle Rd); the Kona-area beach and manta-ray days involve a highway drive each way.
+        </div>
+      </div>
+
+      <div class="stay-card pending" style="--accent:#16a34a">
+        <div class="stay-dates">Oct. 7 – 12, 2026</div>
+        <h3>Kauai — stay TBD</h3>
+        <p class="stay-addr">Address coming soon — send me the Kauai Airbnb details and I'll add the map, drive times, and directions.</p>
+      </div>
+
+      <div class="stay-card pending" style="--accent:#7c3aed">
+        <div class="stay-dates">Oct. 12 – 17, 2026</div>
+        <h3>Maui — stay TBD</h3>
+        <p class="stay-addr">Address coming soon — send me the Maui Airbnb details and I'll add the map, drive times, and directions.</p>
+      </div>
+
     </div>
   </section>
 
@@ -469,6 +544,7 @@ footer {
       <p class="summary">Fly LAX → KOA. Check in, grocery stop, explore Kona town, sunset dinner.</p>
       <div class="details">
         <ul><li>Fly LAX → KOA</li><li>Check into house</li><li>Grocery stop</li><li>Explore Kona town</li><li>Sunset dinner</li></ul>
+        <div class="drive">🚗 <strong>KOA airport → house:</strong> ~20 min. Grab groceries at the Shops at Mauna Lani (~5 min from house). Kona town for dinner/exploring is ~30 min south. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Kona+International+Airport&destination=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743">Airport → house</a></div>
         <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/hawaii-big-island/regions/kona">Explore Kona / Kailua-Kona</a></div>
       </div>
     </article>
@@ -486,6 +562,7 @@ footer {
       <p class="summary">Kahaluʻu Beach Park snorkeling and Magic Sands Beach.</p>
       <div class="details">
         <ul><li>Kahaluʻu Beach Park snorkeling</li><li>Magic Sands Beach</li><li>Relaxed dinner</li></ul>
+        <div class="drive">🚗 <strong>House → Kahaluʻu Beach:</strong> ~40 min each way (it's just south of Kona town). <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743&destination=Kahaluu+Beach+Park+Kailua-Kona+HI">Directions from our stay</a></div>
         <div class="links"><a target="_blank" href="https://www.kahaluu.org/">Kahaluʻu Beach Park</a><a target="_blank" href="https://www.gohawaii.com/listing/laaloa-magic-sands-beach/442">Magic Sands Beach</a></div>
       </div>
     </article>
@@ -503,6 +580,7 @@ footer {
       <p class="summary">Maybe: Hawaiʻi Volcanoes National Park during the day. Must-do: Manta Ray Night Snorkel in the evening.</p>
       <div class="details">
         <ul><li>Early drive to Hawaiʻi Volcanoes National Park if the group is up for it</li><li>Thurston Lava Tube / Kīlauea overlooks</li><li>Return to Kona</li><li>Evening Manta Ray Night Snorkel</li></ul>
+        <div class="drive">🚗 <strong>Heads up on distances:</strong> Volcanoes NP is ~2 hr 15 min <em>each way</em> from our Mauna Lani house — a big day. The manta-ray meeting point in Kona is ~30 min away, and you'll drive back in the dark after the snorkel. Doing both in one day is a lot of driving; consider a very early Volcanoes start, or moving Volcanoes to a different day. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743&destination=Hawaii+Volcanoes+National+Park">To Volcanoes NP</a> · <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743&destination=Honokohau+Harbor+Kailua-Kona+HI">To Kona (manta harbor)</a></div>
         <div class="note"><strong>Booking note:</strong> Priority booking: reserve the manta ray night snorkel early. Pick an earlier evening tour if available so you have flexibility if weather affects the tour.</div>
         <div class="links"><a target="_blank" href="https://konasnorkeltrips.com/snorkel-tours/manta-ray-snorkel-kona/">Book: Kona Snorkel Trips — Manta Ray Night Snorkel</a><a target="_blank" href="https://www.nps.gov/havo/index.htm">Hawaiʻi Volcanoes National Park</a></div>
       </div>
@@ -521,6 +599,7 @@ footer {
       <p class="summary">Easy morning, then Mauna Kea sunset and stargazing tour.</p>
       <div class="details">
         <ul><li>Sleep in / relaxed morning</li><li>Lunch in Kona</li><li>Afternoon pickup or drive to tour meeting point</li><li>Mauna Kea sunset</li><li>Stargazing after dark</li></ul>
+        <div class="drive">🚗 <strong>House → Mauna Kea Visitor Station:</strong> ~1 hr via Waikoloa Rd → Saddle Rd (Daniel K. Inouye Hwy). This is one of the closer big activities to our stay. Bring warm layers — it's freezing at elevation. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743&destination=Mauna+Kea+Visitor+Information+Station">Directions from our stay</a></div>
         <div class="note"><strong>Booking note:</strong> Bring warm clothes. It can be surprisingly cold at elevation.</div>
         <div class="links"><a target="_blank" href="https://maunakea.com/">Book: Mauna Kea Summit Adventures</a><a target="_blank" href="https://maunakeasunset.com/">Alternative: Mauna Kea Sunset</a></div>
       </div>
@@ -539,6 +618,7 @@ footer {
       <p class="summary">Fly KOA → LIH. Check in, beach, dinner.</p>
       <div class="details">
         <ul><li>Fly KOA → LIH</li><li>Check in</li><li>Nearby beach</li><li>Easy dinner</li></ul>
+        <div class="drive">🚗 <strong>Morning:</strong> Mauna Lani house → Kona airport (KOA) is ~20 min. Leave time to return the rental / drop bags before the KOA → LIH flight. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743&destination=Kona+International+Airport">House → KOA</a></div>
       </div>
     </article>
 
@@ -805,6 +885,7 @@ footer {
         <label><input type="checkbox" data-key="book-maunakea"> Book Mauna Kea sunset/stargazing tour for Oct. 6</label>
         <label><input type="checkbox" data-key="decide-kayak-boat"> Decide: Secret Falls kayak vs Nā Pali sunset boat cruise</label>
         <label><input type="checkbox" data-key="book-molokini"> Book Molokini + Turtle Town snorkel cruise</label>
+        <label><input type="checkbox" data-key="decide-volcanoes"> Decide on Volcanoes NP day — it's ~2 hr 15 min each way from the Mauna Lani house</label>
         <label><input type="checkbox" data-key="decide-hana"> Decide whether Road to Hana will be self-drive or guided</label>
         <label><input type="checkbox" data-key="reserve-waianapanapa"> Reserve Waiʻānapanapa if doing black sand beach on Road to Hana</label>
         <label><input type="checkbox" data-key="dinner-reservations"> Add dinner reservations once lodging is finalized</label>
