@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trip Calendar · Hawaii 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="site-nav">
+  <a class="brand" href="index.html">🌺 Hawaii 2026</a>
+  <div class="site-links">
+    <a class="site-link" href="index.html">Home</a>
+    <a class="site-link active" href="calendar.html">Calendar</a>
+    <a class="site-link" href="dining.html">Dining &amp; Reservations</a>
+    <a class="site-link" href="littleones.html">Little Ones</a>
+  </div>
+</div>
+
+<header class="page-header" style="background-image:linear-gradient(135deg, rgba(15,118,110,.9), rgba(2,132,199,.72) 50%, rgba(249,115,22,.86)), url('images/maui.jpg')">
+  <div class="header-inner">
+    <h1>Trip Calendar</h1>
+    <div class="subtitle">October 2026 · at-a-glance, color-coded by island</div>
+  </div>
+</header>
+<div class="tapa-band"></div>
+
+<main>
+  <p class="lead">Every day of the trip on one grid. Tap any day to jump to its full details on the itinerary.</p>
+
+  <div class="cal-legend">
+    <span><i style="background:#0284c7"></i> Travel / Los Angeles</span>
+    <span><i style="background:#dc2626"></i> Big Island</span>
+    <span><i style="background:#16a34a"></i> Kauai</span>
+    <span><i style="background:#7c3aed"></i> Maui</span>
+    <span><i style="background:#475569"></i> Travel home</span>
+  </div>
+
+  <div class="cal-head">
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+</main>
+
+<div class="tapa-band"></div>
+<footer>
+  <span class="aloha">A hui hou — until we meet again</span>
+  Custom Hawaii travel dashboard · Bookmark this page and share it with the family.
+</footer>
+
+<script>
+// Trip data — keep in sync with the itinerary on index.html
+const trips = {
+  1:  { isl: 'Travel',      act: 'Pittsburgh → Los Angeles',   color: '#0284c7' },
+  2:  { isl: 'Los Angeles', act: 'LA day (Universal option)',  color: '#0284c7' },
+  3:  { isl: 'Big Island',  act: 'Arrive in Kona',             color: '#dc2626' },
+  4:  { isl: 'Big Island',  act: 'Beach + snorkel day',        color: '#dc2626' },
+  5:  { isl: 'Big Island',  act: 'Manta Ray Night Snorkel',    color: '#dc2626' },
+  6:  { isl: 'Big Island',  act: 'Mauna Kea sunset + stars',   color: '#dc2626' },
+  7:  { isl: 'Kauai',       act: 'Travel to Kauai',            color: '#16a34a' },
+  8:  { isl: 'Kauai',       act: 'Nā Pali Coast helicopter',   color: '#16a34a' },
+  9:  { isl: 'Kauai',       act: 'Waimea Canyon + Kōkeʻe',     color: '#16a34a' },
+  10: { isl: 'Kauai',       act: 'Flexible day + beach luau',  color: '#16a34a' },
+  11: { isl: 'Kauai',       act: 'Hanalei / beach day',        color: '#16a34a' },
+  12: { isl: 'Maui',        act: 'Travel to Maui',             color: '#7c3aed' },
+  13: { isl: 'Maui',        act: 'Molokini + Turtle Town',     color: '#7c3aed' },
+  14: { isl: 'Maui',        act: 'Road to Hana',               color: '#7c3aed' },
+  15: { isl: 'Maui',        act: 'Beach / resort day',         color: '#7c3aed' },
+  16: { isl: 'Maui',        act: 'Haleakalā sunset + stars',   color: '#7c3aed' },
+  17: { isl: 'Travel',      act: 'Maui → Pittsburgh',          color: '#475569' },
+};
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const FIRST_DOW = 4; // Oct 1, 2026 is a Thursday
+const DAYS_IN_MONTH = 31;
+
+const grid = document.getElementById('calGrid');
+// leading blanks
+for (let i = 0; i < FIRST_DOW; i++) {
+  const c = document.createElement('div');
+  c.className = 'cal-cell empty';
+  grid.appendChild(c);
+}
+for (let d = 1; d <= DAYS_IN_MONTH; d++) {
+  const cell = document.createElement('div');
+  const t = trips[d];
+  const dow = DOW[(FIRST_DOW + d - 1) % 7];
+  if (t) {
+    cell.className = 'cal-cell trip';
+    cell.style.setProperty('--accent', t.color);
+    cell.innerHTML =
+      '<a class="cal-link" href="index.html#day-oct-' + d + '">' +
+        '<span class="dnum">' + d + '</span> <span class="dow">' + dow + '</span>' +
+        '<span class="cal-badge">' + t.isl + '</span>' +
+        '<div class="cal-act">' + t.act + '</div>' +
+      '</a>';
+  } else {
+    cell.className = 'cal-cell';
+    cell.innerHTML = '<span class="dnum" style="color:#b8ad97">' + d + '</span> <span class="dow">' + dow + '</span>';
+  }
+  grid.appendChild(cell);
+}
+</script>
+</body>
+</html>
