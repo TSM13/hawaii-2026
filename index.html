@@ -99,10 +99,25 @@
     <div class="section-title">
       <div>
         <h2>Where We're Staying</h2>
-        <p>Our home base on each island, with maps and drive context.</p>
+        <p>Our home base for each stop, with maps and drive context.</p>
       </div>
     </div>
     <div class="stays-grid">
+
+      <div class="stay-card" style="--accent:#0284c7">
+        <div class="stay-dates">Oct. 1 – 3, 2026</div>
+        <h3>Los Angeles — Anaheim (Courtyard by Marriott)</h3>
+        <p class="stay-addr">Courtyard by Marriott Anaheim Theme Park Entrance<br>1420 S Harbor Blvd, Anaheim, CA 92802<br>👪 3 adults + child (2 yr) · 1-BR suite (king + bunk beds)<br>☎ +1-714-254-1442 · Conf# ••••Y1J6</p>
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=1420%20South%20Harbor%20Boulevard%2C%20Anaheim%2C%20CA%2092802&output=embed"></iframe>
+        <div class="stay-links">
+          <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Los+Angeles+International+Airport&destination=1420+S+Harbor+Blvd+Anaheim+CA+92802">LAX → hotel directions</a>
+          <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Disneyland+Park+main+entrance">Disneyland (across the street)</a>
+        </div>
+        <div class="drive" style="margin-top:12px">
+          <strong>Home base note:</strong> Check-in Thu Oct 1, 4:00 pm · check-out Sat Oct 3, 11:00 am. It's right at the <strong>Disneyland main entrance</strong> (~5–10 min walk) and ~40–60 min from LAX depending on traffic.
+        </div>
+      </div>
 
       <div class="stay-card" style="--accent:#dc2626">
         <div class="stay-dates">Oct. 3 – 7, 2026</div>
@@ -161,35 +176,39 @@
     </div>
     <div class="day-grid" id="dayGrid">
 
-    <article id="day-oct-1" class="day-card" data-island="Travel / Los Angeles" data-map="Los Angeles International Airport" style="--accent:#0284c7">
+    <article id="day-oct-1" class="day-card" data-island="Travel / Los Angeles" data-map="Courtyard by Marriott Anaheim Theme Park Entrance, 1420 S Harbor Blvd, Anaheim CA" style="--accent:#0284c7">
       <div class="day-top">
         <div>
           <div class="date">Oct. 1 <span>Thursday</span></div>
-          <h3>Pittsburgh → Los Angeles</h3>
+          <h3>Pittsburgh → Los Angeles (Anaheim)</h3>
           <p class="island">Travel / Los Angeles</p>
         </div>
         <button onclick="toggleCard(this)">Details</button>
       </div>
-      <p class="summary">Fly PIT → LAX. Check in and relax.</p>
+      <p class="summary">Fly PIT → LAX, drive to the Anaheim hotel by Disneyland, and settle in.</p>
       <div class="details">
-        <ul><li>Fly PIT → LAX</li><li>Check in</li><li>Casual dinner near hotel</li></ul>
+        <ul><li>Fly PIT → LAX</li><li>Drive to Courtyard by Marriott, Anaheim (check-in 4:00 pm)</li><li>Casual dinner near the hotel</li></ul>
+        <div class="drive">🚗 <strong>LAX → Anaheim hotel:</strong> ~40–60 min depending on traffic. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Los+Angeles+International+Airport&destination=1420+S+Harbor+Blvd+Anaheim+CA+92802">LAX → hotel</a></div>
+        <div class="note">🏨 <strong>Hotel:</strong> Courtyard by Marriott Anaheim Theme Park Entrance · 1420 S Harbor Blvd · check-in Thu Oct 1, 4:00 pm · <strong>Conf# ••••Y1J6</strong>. See <a href="index.html#stays">Where We're Staying</a>.</div>
       </div>
     </article>
 
 
-    <article id="day-oct-2" class="day-card" data-island="Los Angeles" data-map="Universal Studios Hollywood" style="--accent:#0284c7">
+    <article id="day-oct-2" class="day-card" data-island="Los Angeles" data-map="Disneyland Park, Anaheim CA" style="--accent:#0284c7">
       <div class="day-top">
         <div>
           <div class="date">Oct. 2 <span>Friday</span></div>
-          <h3>Los Angeles Day</h3>
+          <h3>Disneyland Day 🏰</h3>
           <p class="island">Los Angeles</p>
         </div>
         <button onclick="toggleCard(this)">Details</button>
       </div>
-      <p class="summary">Optional Universal Studios day or easy travel-recovery day.</p>
+      <p class="summary">Booked: 1-Day Park Hopper at Disneyland — and the hotel is right at the park entrance.</p>
       <div class="details">
-        <ul><li>Universal Studios option</li><li>Relax before Hawaii travel</li></ul>
-        <div class="links"><a target="_blank" href="https://www.universalstudioshollywood.com/">Universal Studios Hollywood</a></div>
+        <ul><li>Walk to Disneyland from the hotel (~5–10 min)</li><li>Park Hopper — Disneyland Park + Disney California Adventure</li><li>Lightning Lane Multi Pass included (make selections in the Disneyland app)</li><li>Start at Disneyland Park</li></ul>
+        <div class="note">✅ <strong>Booked:</strong> 1-Day Tier 3 <strong>Park Hopper</strong> + Lightning Lane Multi Pass — <strong>Fri Oct 2</strong>, starting at Disneyland Park. 3 guests (Taylor, Timothy, Heidi); the 2-yr-old is free (under 3). Ticket conf# ••••3040 · park conf# ••••0576.</div>
+        <div class="note">⚠️ <strong>Do this first:</strong> a <strong>park reservation is required</strong> in addition to the ticket — reserve Disneyland Park for Oct 2 in your Disney account, and download the Disneyland app for Lightning Lane.</div>
+        <div class="links"><a target="_blank" href="https://disneyland.disney.go.com/">Disneyland — manage reservations</a></div>
       </div>
     </article>
 
@@ -203,9 +222,10 @@
         </div>
         <button onclick="toggleCard(this)">Details</button>
       </div>
-      <p class="summary">Fly LAX → KOA. Check in, grocery stop, explore Kona town, sunset dinner.</p>
+      <p class="summary">Check out of Anaheim, fly LAX → KOA, then check in, grocery stop, explore Kona town, sunset dinner.</p>
       <div class="details">
-        <ul><li>Fly LAX → KOA</li><li>Check into house</li><li>Grocery stop</li><li>Explore Kona town</li><li>Sunset dinner</li></ul>
+        <ul><li>Check out of Anaheim hotel by 11:00 am</li><li>Drive to LAX, fly LAX → KOA</li><li>Check into house</li><li>Grocery stop</li><li>Explore Kona town</li><li>Sunset dinner</li></ul>
+        <div class="drive">🚗 <strong>Morning (LA):</strong> Anaheim hotel → LAX ~40–60 min — leave a solid buffer for the flight. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=1420+S+Harbor+Blvd+Anaheim+CA+92802&destination=Los+Angeles+International+Airport">Hotel → LAX</a></div>
         <div class="drive">🚗 <strong>KOA airport → house:</strong> ~20 min. Grab groceries at the Shops at Mauna Lani (~5 min from house). Kona town for dinner/exploring is ~30 min south. <a target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Kona+International+Airport&destination=68-1050+Mauna+Lani+Point+Drive+Waimea+HI+96743">Airport → house</a></div>
         <div class="links"><a target="_blank" href="https://www.gohawaii.com/islands/hawaii-big-island/regions/kona">Explore Kona / Kailua-Kona</a></div>
       </div>
@@ -554,6 +574,7 @@
         <span class="saved-note" id="savedNote"></span>
       </div>
       <div class="checklist-items" id="checklistItems">
+        <label><input type="checkbox" data-key="disney-reservation"> Make Disneyland park reservation for Oct 2 (required with the ticket) + get the Disneyland app</label>
         <label><input type="checkbox" data-key="book-manta"> Manta Ray Night Snorkel — ✅ booked Oct. 4, 8:00 pm</label>
         <label><input type="checkbox" data-key="book-heli"> Book Nā Pali Coast helicopter tour for Oct. 8</label>
         <label><input type="checkbox" data-key="book-maunakea"> Book Mauna Kea sunset/stargazing tour for Oct. 6</label>
