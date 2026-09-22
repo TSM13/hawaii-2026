@@ -1,0 +1,7 @@
+# Pasted screenshots / scratch images dropped in the repo root — never publish these
+/image.png
+/image*.png
+/screenshot*.png
+/Pasted*.png
+*.tmp
+.tmp/
